@@ -119,5 +119,26 @@ function ticTacToe(board) {
  * @returns {Number} the time that it will take the shuttle to travel from firstStop to secondStop
  */
 function eta(firstStop, secondStop, routeMap) {
-    // Write your code here
+    let stops = Object.keys(routeMap);
+    let time = 0;
+    let foundStart = false;
+    
+    while (true) {
+        for (let i = 0; i < stops.length; i++) {
+            let currentStop = stops[i];
+            let nextStop = stops[(i + 1) % stops.length];
+            
+            if (currentStop === firstStop) {
+                foundStart = true;
+            }
+            
+            if (foundStart) {
+                time += routeMap[currentStop];
+                
+                if (nextStop === secondStop) {
+                    return time;
+                }
+            }
+        }
+    }
 }
